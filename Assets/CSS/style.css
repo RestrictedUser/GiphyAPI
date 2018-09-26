@@ -1,0 +1,40 @@
+
+
+#header {
+	background-color: #e509c8;
+	color: #ffffff;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	font-family: "Carrois Gothic SC", sans-serif;
+}
+
+label {
+	font-size: 18px;
+}
+
+#show {
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color:#e509c8;
+}
+
+#gifSearch {
+	margin: 0 auto;
+	text-align: center;
+	font-family: "Carrois Gothic SC", sans-serif;
+}
+
+#gifDiv {
+	clear: both;
+	display: inline;
+	flex-wrap: wrap;
+}
+
+.movieGif {
+	padding: 2px;
+	width: 80%;
+}
+
