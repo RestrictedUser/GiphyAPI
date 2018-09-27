@@ -11,7 +11,6 @@ $(document).ready(function(){
     
     // api link and key for giphy with a limit of 10
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=GFANg7EsACPby359OcaadValMQMujRvw&limit=10";
-
     console.log(queryURL);
 
     // json object format with ajax
@@ -68,45 +67,72 @@ $(document).ready(function(){
     //click event for movie input
     $("#addMovie").on('click', function(){
         event.preventDefault();
+       
         // var newMovie has value of id movieInput from html and takes its value and trims down any extra space
         var newMovie = $("#movieInput").val().trim();
+        
         // once a value has been entered from user push the value being held in newMovie into topics array
         topics.push(newMovie);
 
         console.log(topics);
+        
+        // text value for movieInput is emptied so that the user wont have to backspace there movie
         $("#movieInput").val("");
+        
         displayButtons();
 
     });
-
+    // creates button from the value of movieInput
         function displayButtons() {
-        $("#myButtons").empty();
-        for (var i = 0; i < topics.length; i++) {
-          var button = $('<button class="btn btn-primary">');
-          button.attr("id", "show");
-          button.attr("data-search", topics[i]);
-          button.text(topics[i]);
-          $("#myButtons").append(button);
+            
+            // empties the button so that when you submit a new value it doesnt push the old value with it
+            $("#myButtons").empty();
+        
+            // loop through the length of topics but becauise topics always gets a new index from pushing newMovie the loop will always run because both topics[] and i ++ after running displayButtons inside the addmovie click event
+            for (var i = 0; i < topics.length; i++) {
+          
+                // creates a value = a new button
+                var button = $('<button class="btn btn-primary">');
+                
+                //attr a new id with value of show
+                button.attr("id", "show");
+                
+                // attr the data-search with topics[i] api will use the data-search to find the movie you are looking for
+                button.attr("data-search", topics[i]);
+          
+                // adds text to the newly created button with the value of topics[i] which is the value of the movie name you submitted into input 
+                button.text(topics[i]);
+          
+                // append #myButtons to come after var button this will make new buttons appear after the previously made button
+                $("#myButtons").append(button);
         }
       }
     
     
       displayButtons();
 
-       
+       //When clicking on #show(any preset movie buttons) run displayGif which will show gif
         $(document).on("click", "#show", displayGif);
 
-  
+        //when .movieGif is clicked run pausePlayGifs which runs the element through and if/else statement to allow you to control if the gif is animated or still based off clicking the element
         $(document).on("click", ".movieGif", pausePlayGifs);
 
  
         function pausePlayGifs() {
   	        var state = $(this).attr("data-state");
+            
+            // when the gif is clicked set gif to have a src of data-animate and data-state set to animate ( this will animate the img if it is still on click)
             if (state === "still") {
+                
                 $(this).attr("src", $(this).attr("data-animate"));
+               
                 $(this).attr("data-state", "animate");
-        } else {
+            } 
+            else {
+            
+            // if gif is not still run else which creates a src = date-still  and date-state=still making the gif still
             $(this).attr("src", $(this).attr("data-still"));
+            
             $(this).attr("data-state", "still");
   }
 }
